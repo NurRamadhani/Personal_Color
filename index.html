@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Personal Color Analysis - Face Only</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<section id="uploadSection" class="page-section upload-landing">
+    <div class="container-shell">
+        <div class="landing-hero">
+            <div>
+                <div class="hero-eyebrow">
+                    <div class="status-chip">
+                        <span class="status-dot"></span>
+                        <span>Face-only engine aktif</span>
+                    </div>
+                    <div class="face-chip">Background ignored</div>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-black leading-[.95] tracking-[-.055em] mb-7">
+                    Discover Your <span class="gradient-text">Perfect Palette</span>
+                </h1>
+
+                <p class="text-slate-600 text-lg md:text-xl leading-relaxed max-w-2xl mb-7">
+                    Temukan warna makeup, hijab, dan outfit yang paling harmonis dengan karakter warna alami wajahmu. Sistem hanya membaca area wajah agar background, baju, dan dekorasi tidak memengaruhi hasil.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#personalColorInfo" class="secondary-button">Pelajari Personal Color</a>
+                </div>
+
+                <div class="hero-note">
+                    <div class="hero-note-icon">i</div>
+                    <div>
+                        Untuk hasil terbaik, gunakan foto wajah depan dengan cahaya alami, tanpa filter warna, dan tanpa bayangan kuat. Foto yang bersih membuat analisis undertone, depth, dan contrast lebih stabil.
+                    </div>
+                </div>
+            </div>
+
+            <label class="upload-card hover-card">
+                <input type="file" id="photoUpload" accept="image/*" class="hidden">
+                <div class="upload-inner">
+                    <div class="upload-icon">✨</div>
+                    <div class="text-3xl font-black text-slate-900 mb-3 tracking-[-.03em]">Upload Portrait</div>
+                    <div class="text-slate-500 max-w-xs leading-relaxed mb-7">
+                        Gunakan foto wajah depan, cahaya alami, dan hindari filter warna.
+                    </div>
+                    <div class="primary-button">Mulai Analisis</div>
+                    <div class="mt-6 text-xs font-bold text-slate-400 uppercase tracking-[.14em]">JPG, PNG, atau WebP</div>
+                </div>
+            </label>
+        </div>
+
+        <div id="personalColorInfo" class="intro-stack">
+            <article class="glass card intro-card">
+                <span class="section-kicker">Apa itu personal color?</span>
+                <h2>Personal color membantu memilih warna yang paling menyatu dengan wajah.</h2>
+                <p>
+                    Personal color adalah metode analisis warna untuk menemukan kelompok warna yang selaras dengan undertone kulit, tingkat terang gelap wajah, intensitas warna, dan kontras fitur wajah. Tujuannya sederhana: membuat wajah terlihat lebih segar, cerah, dan seimbang tanpa harus menebak-nebak warna yang cocok.
+                </p>
+
+                <div class="factor-grid">
+                    <div class="factor-item">
+                        <strong>Undertone</strong>
+                        <span>Arah warna kulit: warm, cool, atau neutral.</span>
+                    </div>
+                    <div class="factor-item">
+                        <strong>Depth</strong>
+                        <span>Tingkat terang gelap keseluruhan warna wajah.</span>
+                    </div>
+                    <div class="factor-item">
+                        <strong>Chroma</strong>
+                        <span>Seberapa jernih atau muted warna alami wajah.</span>
+                    </div>
+                    <div class="factor-item">
+                        <strong>Contrast</strong>
+                        <span>Perbedaan terang gelap antara kulit dan fitur wajah.</span>
+                    </div>
+                </div>
+            </article>
+
+            <section class="glass info-panel">
+                <div class="section-heading">
+                    <span class="section-kicker">Tipe personal color</span>
+                    <h2>4 season utama dengan 12 subtype warna.</h2>
+                    <p>
+                        Sistem personal color umum memakai empat keluarga besar: Spring, Summer, Autumn, dan Winter. Setiap season memiliki variasi yang lebih spesifik agar rekomendasi warna tidak terlalu umum.
+                    </p>
+                </div>
+
+                <div class="season-type-grid">
+                    <div class="season-type-card">
+                        <div class="season-icon">🌷</div>
+                        <h3>Spring</h3>
+                        <p>Warna hangat, cerah, segar, dan ringan. Cocok untuk karakter wajah yang terlihat hidup dengan warna peach, coral, mint, dan kuning lembut.</p>
+                        <div class="type-chip-list">
+                            <span class="type-chip">Light Spring</span>
+                            <span class="type-chip">Warm Spring</span>
+                            <span class="type-chip">Clear Spring</span>
+                        </div>
+                    </div>
+
+                    <div class="season-type-card">
+                        <div class="season-icon">🌊</div>
+                        <h3>Summer</h3>
+                        <p>Warna dingin, lembut, dan tenang. Cocok untuk wajah yang lebih harmonis dengan powder blue, lavender, dusty rose, dan soft grey.</p>
+                        <div class="type-chip-list">
+                            <span class="type-chip">Light Summer</span>
+                            <span class="type-chip">Cool Summer</span>
+                            <span class="type-chip">Soft Summer</span>
+                        </div>
+                    </div>
+
+                    <div class="season-type-card">
+                        <div class="season-icon">🍂</div>
+                        <h3>Autumn</h3>
+                        <p>Warna hangat, earthy, dan matang. Cocok untuk wajah yang kuat dengan terracotta, olive, camel, bronze, mocha, dan mustard.</p>
+                        <div class="type-chip-list">
+                            <span class="type-chip">Warm Autumn</span>
+                            <span class="type-chip">Soft Autumn</span>
+                            <span class="type-chip">Deep Autumn</span>
+                        </div>
+                    </div>
+
+                    <div class="season-type-card">
+                        <div class="season-icon">❄️</div>
+                        <h3>Winter</h3>
+                        <p>Warna dingin, tegas, dan kontras. Cocok untuk wajah yang terlihat bersih dengan navy, black, white, berry, royal blue, dan icy tone.</p>
+                        <div class="type-chip-list">
+                            <span class="type-chip">Deep Winter</span>
+                            <span class="type-chip">Cool Winter</span>
+                            <span class="type-chip">Clear Winter</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass info-panel">
+                <div class="section-heading">
+                    <span class="section-kicker">Manfaat personal color</span>
+                    <h2>Lebih mudah memilih warna yang benar-benar bekerja untukmu.</h2>
+                    <p>
+                        Personal color bukan aturan kaku. Ini alat bantu agar keputusan warna lebih praktis, terutama saat memilih makeup, hijab, outfit, warna rambut, dan kebutuhan visual branding.
+                    </p>
+                </div>
+
+                <div class="benefit-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💄</div>
+                        <h3>Makeup lebih natural</h3>
+                        <p>Memilih lipstik, blush, dan eyeshadow yang menyatu dengan undertone wajah.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🧕</div>
+                        <h3>Hijab lebih flattering</h3>
+                        <p>Warna hijab dekat wajah terlihat lebih segar dan tidak membuat kulit tampak kusam.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">👕</div>
+                        <h3>Outfit lebih terarah</h3>
+                        <p>Membantu memilih warna baju yang cocok untuk daily look, kerja, acara, atau foto.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🛍️</div>
+                        <h3>Belanja lebih efisien</h3>
+                        <p>Mengurangi pembelian warna yang jarang dipakai karena ternyata kurang cocok.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎨</div>
+                        <h3>Wardrobe lebih konsisten</h3>
+                        <p>Membuat koleksi warna lebih mudah dipadukan dalam capsule wardrobe.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📸</div>
+                        <h3>Tampilan foto lebih kuat</h3>
+                        <p>Membantu memilih warna untuk konten, personal branding, dan kebutuhan profesional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass info-panel">
+                <div class="section-heading">
+                    <span class="section-kicker">Cara kerja analisis</span>
+                    <h2>Foto dibaca dengan pendekatan face-only.</h2>
+                    <p>
+                        Website ini memisahkan wajah dari background, mengambil sampel warna kulit yang lebih bersih, lalu menghitung undertone, depth, chroma, dan contrast untuk menentukan season yang paling mendekati.
+                    </p>
+                </div>
+
+                <div class="process-grid text-left">
+                    <div class="glass step-card">
+                        <div class="step-number">1</div>
+                        <div class="font-extrabold text-slate-800 mb-1">Face contour</div>
+                        <div class="text-sm text-slate-500 leading-relaxed">Wajah dipisahkan dari background agar warna sekitar tidak ikut terbaca.</div>
+                    </div>
+                    <div class="glass step-card">
+                        <div class="step-number">2</div>
+                        <div class="font-extrabold text-slate-800 mb-1">Skin sampling</div>
+                        <div class="text-sm text-slate-500 leading-relaxed">Sampel kulit diambil dari area wajah yang lebih stabil.</div>
+                    </div>
+                    <div class="glass step-card">
+                        <div class="step-number">3</div>
+                        <div class="font-extrabold text-slate-800 mb-1">Season match</div>
+                        <div class="text-sm text-slate-500 leading-relaxed">Data warna dicocokkan dengan 12 tipe personal color.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+<section id="loadingSection" class="hidden page-section min-h-screen flex items-center justify-center">
+    <div class="glass rounded-4xl loading-card">
+        <img id="previewImage" class="loading-preview" src="" alt="Preview portrait">
+
+        <div class="text-3xl font-black text-slate-900 mb-3 tracking-[-.03em]">
+            Analyzing
+        </div>
+
+        <div id="loadingText" class="text-slate-600 mb-6">
+            Preparing image.
+        </div>
+
+        <div class="progress-track">
+            <div id="progressBar" class="progress-fill" style="width:0%"></div>
+        </div>
+    </div>
+</section>
+
+<section id="resultsSection" class="hidden page-section">
+    <div class="container-shell">
+        <div class="result-header">
+            <div class="glass season-hero">
+                <div class="status-chip mb-5">
+                    <span class="status-dot"></span>
+                    <span>Personal color result</span>
+                </div>
+                <div id="seasonResult" class="season-label gradient-text"></div>
+                <p class="relative z-[1] text-slate-600 mt-5 max-w-xl leading-relaxed">
+                    Hasil ini dihitung dari sampel warna wajah yang sudah dipisahkan dari background.
+                </p>
+            </div>
+
+            <div class="summary-metrics">
+                <div class="glass metric-card hover-card">
+                    <div id="undertoneResult" class="metric-value"></div>
+                    <div class="metric-label">Undertone</div>
+                </div>
+                <div class="glass metric-card hover-card">
+                    <div id="depthResult" class="metric-value"></div>
+                    <div class="metric-label">Depth</div>
+                </div>
+                <div class="glass metric-card hover-card">
+                    <div id="contrastResult" class="metric-value"></div>
+                    <div class="metric-label">Contrast</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="analysisWarning" class="hidden warning-box rounded-3xl p-5 mb-7 text-center font-semibold"></div>
+
+        <div class="result-grid">
+            <div class="result-left">
+                <div class="glass card hover-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Face-only Portrait</div>
+                            <div class="card-subtitle">Area transparan tidak ikut dianalisis.</div>
+                        </div>
+                        <div class="face-chip">No background</div>
+                    </div>
+
+                    <div class="face-stage">
+                        <div class="face-result-wrapper">
+                            <img id="resultImage" class="face-result-image" src="" alt="Face-only analysis result">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass card hover-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Beauty Intelligence</div>
+                            <div class="card-subtitle">Ringkasan kualitas sampel dan keyakinan analisis.</div>
+                        </div>
+                    </div>
+
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <div id="harmonyScore" class="score-value"></div>
+                            <div class="score-label">Confidence</div>
+                        </div>
+                        <div class="score-item">
+                            <div id="brightnessScore" class="score-value"></div>
+                            <div class="score-label">Brightness</div>
+                        </div>
+                        <div class="score-item">
+                            <div id="undertoneScore" class="score-value"></div>
+                            <div class="score-label">Undertone Score</div>
+                        </div>
+                        <div class="score-item">
+                            <div id="colorMatch" class="score-value"></div>
+                            <div class="score-label">Sample Quality</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-right">
+                <div class="glass card hover-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Signature Palette</div>
+                            <div class="card-subtitle">Warna utama yang paling harmonis dengan hasil season.</div>
+                        </div>
+                    </div>
+
+                    <div id="colorPalette" class="palette-grid"></div>
+                </div>
+
+                <div class="glass card hover-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Style Recommendations</div>
+                            <div class="card-subtitle">Rekomendasi makeup, hijab, dan outfit dengan lebih banyak pilihan warna untuk best, good, dan avoid color.</div>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-guide">
+                        <div class="recommendation-guide-item">
+                            <div class="guide-title">✅ Best Color</div>
+                            <div class="guide-copy">Pilihan utama. Paling aman dipakai dekat wajah.</div>
+                        </div>
+                        <div class="recommendation-guide-item">
+                            <div class="guide-title">👍 Good Color</div>
+                            <div class="guide-copy">Masih cocok. Bagus untuk variasi harian.</div>
+                        </div>
+                        <div class="recommendation-guide-item">
+                            <div class="guide-title">⚠️ Avoid Color</div>
+                            <div class="guide-copy">Sebaiknya dijauhkan dari area wajah.</div>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-grid">
+                        <div class="recommendation-card">
+                            <div class="recommendation-title">💋 Perfect Makeup</div>
+                            <div id="makeupSwatches"></div>
+                            <div id="makeupRec" class="text-slate-600 mt-4 leading-relaxed"></div>
+                        </div>
+
+                        <div class="recommendation-card">
+                            <div class="recommendation-title">🧕 Hijab Colors</div>
+                            <div id="hijabSwatches"></div>
+                            <div id="hijabRec" class="text-slate-600 mt-4 leading-relaxed"></div>
+                        </div>
+
+                        <div class="recommendation-card">
+                            <div class="recommendation-title">👕 Outfit Guide</div>
+                            <div id="outfitSwatches"></div>
+                            <div id="outfitRec" class="text-slate-600 mt-4 leading-relaxed"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass card hover-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Analysis Details</div>
+                            <div class="card-subtitle">Data teknis untuk mengecek kualitas analisis.</div>
+                        </div>
+                    </div>
+                    <div id="analysisDetails" class="text-slate-600"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-10">
+            <button id="newAnalysisBtn" class="primary-button">
+                New Analysis
+            </button>
+        </div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
